@@ -6,6 +6,8 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var messageRouter = require("./routes/messages");
+var apiRouter = require("./api/api");
 var app = express();
 
 // additional packages
@@ -30,7 +32,7 @@ app.use(passport.session());
 // MongoDB Connection
 const dbURI = "mongodb://localhost:27017";
 mongoose
-  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(dbURI)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
@@ -43,5 +45,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/message", messageRouter);
+app.use("/api", apiRouter);
 
 module.exports = app;
