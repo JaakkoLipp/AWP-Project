@@ -3,7 +3,7 @@ const router = express.Router();
 const Message = require("../models/Message");
 const validateToken = require("../auth/validateToken.js");
 
-// @route   POST api/messages
+// @route   POST api/message
 // @desc    Send a message to a user
 // @access  Private
 router.post("/", validateToken, async (req, res) => {
@@ -22,7 +22,7 @@ router.post("/", validateToken, async (req, res) => {
   }
 });
 
-// @route   GET api/messages/:conversationPartnerId
+// @route   GET api/message/:conversationPartnerId
 // @desc    Get messages between the current user and the conversation partner
 // @access  Private
 router.get("/:conversationPartnerId", validateToken, async (req, res) => {

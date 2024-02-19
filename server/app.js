@@ -36,13 +36,13 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
-// routing
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+// configure paths
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/message", messageRouter);

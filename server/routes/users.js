@@ -7,7 +7,9 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const validateToken = require("../auth/validateToken.js");
 
-// path /users/login
+// @route   POST /users/login
+// @desc    post login info, username, password, check and login existing user
+// @access  Public
 router.post(
   "/login",
   body("username").trim().escape(),
@@ -42,7 +44,9 @@ router.post(
   }
 );
 
-// path /users/register
+// @route   POST /users/register
+// @desc    post register info, username, password, check and regsiter new user
+// @access  Public
 router.post(
   "/register",
   body("username").isLength({ min: 3 }).trim().escape(),
