@@ -1,16 +1,16 @@
 import React from "react";
 import "./Menu.css";
-
+import { Nav } from "react-bootstrap";
 function Menu() {
   return (
-    <div className="menu">
-      <ul className="menu-list">
-        <li>Edit your information</li>
-        <li>Add new image</li>
-        <li>List your chats (3)</li>
-        <li>Logout</li>
-      </ul>
-    </div>
+    <Nav defaultActiveKey="/home" className="flex-column">
+      <Nav.Link href="/home">Active</Nav.Link>
+      <Nav.Link eventKey="link-1">Link</Nav.Link>
+      <Nav.Link eventKey="link-2">Link</Nav.Link>
+      <Nav.Link eventKey="disabled" disabled>
+        Disabled
+      </Nav.Link>
+    </Nav>
   );
 }
 
