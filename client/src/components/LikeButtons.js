@@ -1,4 +1,5 @@
 import React from "react";
+import "./LikeButtons.css";
 
 function LikeButtons({ onLike, onDislike }) {
   return (

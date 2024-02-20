@@ -14,8 +14,7 @@ function App() {
   return (
     <Router>
       <Menu />
-      <div className="App" style={{ marginLeft: "220px" }}>
-        <h1>Page</h1>
+      <div className="App">
         <h2>{jwt ? `Welcome ${user.username}!` : ""}</h2>
         <Routes>
           <Route
