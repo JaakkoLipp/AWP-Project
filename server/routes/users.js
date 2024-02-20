@@ -34,7 +34,12 @@ router.post(
                 expiresIn: 120,
               },
               (err, token) => {
-                res.json({ success: true, token });
+                // error handling
+                if (err) {
+                  throw err;
+                } else {
+                  res.json({ success: true, token });
+                }
               }
             );
           }

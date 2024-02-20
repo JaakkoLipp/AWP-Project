@@ -9,11 +9,15 @@ var usersRouter = require("./routes/users");
 var messageRouter = require("./routes/messages");
 var apiRouter = require("./api/api");
 var app = express();
+const cors = require("cors");
 
 // additional packages
 const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
+
+//CORS
+app.use(cors());
 
 // Middleware
 app.use(express.json());
