@@ -83,17 +83,22 @@ function MessagesPage() {
               {contacts.find((contact) => contact.id === selectedContactId)
                 ?.name || "..."}
             </Card.Header>
-            <Card.Body className="overflow-auto" style={{ height: "500px" }}>
+            <Card.Body
+              className="overflow-auto d-flex flex-column"
+              style={{ height: "500px" }}
+            >
               {messages.map((msg) => (
                 <div
                   key={msg.id}
-                  className={`message ${
-                    msg.senderId === selectedContactId ? "sent" : "received"
+                  className={`message mb-2 ${
+                    msg.senderId === selectedContactId
+                      ? "align-self-end"
+                      : "align-self-start"
                   }`}
                 >
                   {msg.text}
                   <br />
-                  <small>{msg.createdAt.toLocaleTimeString()}</small>
+                  <small>{new Date(msg.createdAt).toLocaleTimeString()}</small>
                 </div>
               ))}
             </Card.Body>

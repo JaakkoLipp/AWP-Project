@@ -1,3 +1,4 @@
-- Dynamic generation of UserCards and matching functionality
-- messaging functionality
+- messaging UI bugs
+- msgs functionality
+- match allows messaging
 - make profile hidden if logged out
