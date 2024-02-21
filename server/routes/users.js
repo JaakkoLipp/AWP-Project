@@ -13,7 +13,7 @@ const validateToken = require("../auth/validateToken.js");
 router.post(
   "/login",
   body("username").trim().escape(),
-  body("password").escape(),
+  body("password"),
   (req, res, next) => {
     User.findOne({ username: req.body.username }, (err, user) => {
       if (err) throw err;
@@ -21,7 +21,13 @@ router.post(
         return res.status(403).json({ message: "Login failed" });
       } else {
         bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
-          if (err) throw err;
+          // improved error handling
+          if (err) {
+            return res.status(500).json({ message: "Server error" });
+          }
+          if (!isMatch) {
+            return res.status(403).json({ message: "Invalid credentials" });
+          }
           if (isMatch) {
             const jwtPayload = {
               id: user._id,
@@ -31,15 +37,10 @@ router.post(
               jwtPayload,
               process.env.SECRET,
               {
-                expiresIn: 120,
+                expiresIn: 10 * 60,
               },
               (err, token) => {
-                // error handling
-                if (err) {
-                  throw err;
-                } else {
-                  res.json({ success: true, token });
-                }
+                res.status(200).json({ success: true, token });
               }
             );
           }
@@ -79,7 +80,7 @@ router.post(
               },
               (err, ok) => {
                 if (err) throw err;
-                return res.redirect("/users/login");
+                return res.status(200).json({ success: true });
               }
             );
           });

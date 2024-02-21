@@ -5,6 +5,8 @@ import React, { useState } from "react";
 import MainPage from "./components/Main";
 import Menu from "./components/Menu";
 import Messages from "./components/Messages";
+import Profile from "./components/Profile";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/messages" element={<Messages />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </Router>

@@ -1,0 +1,4 @@
+- implement AuthContext.js
+- JWT token handling
+- api test
+- integrate backend to front

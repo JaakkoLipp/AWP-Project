@@ -22,7 +22,7 @@ function Menu() {
           {/* login/logout functionality, you can add it here */}
           <Nav>
             <Nav.Link as={Link} to="/profile">
-              Edit Profile
+              Profile
             </Nav.Link>
             <Nav.Link as={Link} to="/login">
               Login
