@@ -1,4 +1,2 @@
-- implement AuthContext.js
-- JWT token handling
-- api test
-- integrate backend to front
+- Dynamic generation of UserCards and matching functionality
+- messaging functionality

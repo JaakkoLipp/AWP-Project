@@ -40,7 +40,7 @@ router.get("/description", validateToken, async (req, res) => {
 // @route   PATCH api/edit-description
 // @desc    Allows user to edits its own description
 // @access  Private
-router.patch("/edit-description", authenticateToken, async (req, res) => {
+router.patch("/edit-description", validateToken, async (req, res) => {
   const { description } = req.body;
 
   // Ensure description is provided

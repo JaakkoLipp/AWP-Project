@@ -1,18 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import UserCard from "./UserCard";
+import { jwtDecode } from "jwt-decode";
+import "./Profile.css";
 
 function Profile() {
+  const { isAuthenticated } = useAuth();
   const [description, setDescription] = useState("");
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
-  // Example function to fetch the current description
   useEffect(() => {
+    const token = localStorage.getItem("token"); // Or wherever you've stored the token
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const username = decodedToken.username; // Assuming the payload contains the username
+      setUsername(username);
+    }
     const fetchProfile = async () => {
       const token = localStorage.getItem("token");
       const response = await fetch("/api/description", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `${token}`,
         },
       });
       if (response.ok) {
@@ -31,10 +42,10 @@ function Profile() {
     e.preventDefault();
     const token = localStorage.getItem("token");
 
-    const response = await fetch("/api/profile/edit-description", {
+    const response = await fetch("/api/edit-description", {
       method: "PATCH",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ description }),
@@ -49,12 +60,18 @@ function Profile() {
     }
   };
 
+  if (!isAuthenticated) {
+    return <p>You must be logged in to edit your profile.</p>;
+  }
+
   return (
-    <div>
-      <h2>Edit Profile Description</h2>
+    <div className="Profile">
+      <h3>Your Profile</h3>
+      <UserCard username={username} bio={description} />
+      <br></br>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
-          <Form.Label>Description</Form.Label>
+          <Form.Label>Edit Description</Form.Label>
           <Form.Control
             as="textarea"
             rows={5}
