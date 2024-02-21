@@ -8,11 +8,69 @@ const validateToken = require("../auth/validateToken.js");
 // @access  Private
 router.get("/users", validateToken, async (req, res) => {
   try {
-    const users = await User.find({ _id: { $ne: req.user.id } });
+    const users = await User.find(
+      { _id: { $ne: req.user.id } },
+      { username: 1, description: 1 }
+    );
     res.json(users);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
+  }
+});
+
+// @route   GET api/description
+// @desc    Get the user's own description
+// @access  Private
+router.get("/description", validateToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+    res.json({ description: user.description });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "An error occurred while retrieving the user's description.",
+    });
+  }
+});
+
+// @route   PATCH api/edit-description
+// @desc    Allows user to edits its own description
+// @access  Private
+router.patch("/edit-description", authenticateToken, async (req, res) => {
+  const { description } = req.body;
+
+  // Ensure description is provided
+  if (!description) {
+    return res.status(400).json({ message: "Description is required." });
+  }
+
+  try {
+    // Assuming req.user.id holds the authenticated user's ID
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      { description },
+      { new: true }
+    );
+
+    // If the user is not found
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    // Respond with the updated user information (without sensitive fields)
+    res.json({
+      message: "Description updated successfully.",
+      description: updatedUser.description,
+    });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while updating the description." });
   }
 });
 
