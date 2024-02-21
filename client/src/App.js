@@ -6,6 +6,7 @@ import MainPage from "./components/Main";
 import Menu from "./components/Menu";
 import Messages from "./components/Messages";
 import Profile from "./components/Profile";
+import { AuthProvider } from "./contexts/AuthContext";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -15,20 +16,22 @@ function App() {
 
   return (
     <Router>
-      <Menu />
-      <div className="App">
-        <h2>{jwt ? `Welcome ${user.username}!` : ""}</h2>
-        <Routes>
-          <Route
-            path="/login"
-            element={<Login setJwt={setJwt} setUser={setUser} jwt={jwt} />}
-          />
-          <Route path="/" element={<MainPage />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/messages" element={<Messages />} />
-          <Route path="/profile" element={<Profile />} />
-        </Routes>
-      </div>
+      <AuthProvider>
+        <Menu />
+        <div className="App">
+          <h2>{jwt ? `Welcome ${user.username}!` : ""}</h2>
+          <Routes>
+            <Route
+              path="/login"
+              element={<Login setJwt={setJwt} setUser={setUser} jwt={jwt} />}
+            />
+            <Route path="/" element={<MainPage />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </div>
+      </AuthProvider>
     </Router>
   );
 }
