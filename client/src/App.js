@@ -4,7 +4,7 @@ import Register from "./components/Register";
 import React, { useState } from "react";
 import MainPage from "./components/Main";
 import Menu from "./components/Menu";
-import Messages from "./components/Messages";
+import MessagesPage from "./components/MessagesPage";
 import Profile from "./components/Profile";
 import { AuthProvider } from "./contexts/AuthContext";
 
@@ -27,7 +27,7 @@ function App() {
             />
             <Route path="/" element={<MainPage />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/messages" element={<Messages />} />
+            <Route path="/messages" element={<MessagesPage />} />
             <Route path="/profile" element={<Profile />} />
           </Routes>
         </div>

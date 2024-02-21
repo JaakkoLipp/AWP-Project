@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col, ListGroup, Form, Button } from "react-bootstrap";
 
-function Messages() {
+function MessagesPage() {
   return (
     <Container>
       <Row>
@@ -29,4 +29,4 @@ function Messages() {
   );
 }
 
-export default Messages;
+export default MessagesPage;

@@ -4,7 +4,7 @@ const User = require("../models/User");
 const validateToken = require("../auth/validateToken.js");
 
 // @route   GET api/users
-// @desc    Get all users excluding the current user
+// @desc    Get all users and their desc excluding the current user
 // @access  Private
 router.get("/users", validateToken, async (req, res) => {
   try {
@@ -74,34 +74,38 @@ router.patch("/edit-description", validateToken, async (req, res) => {
   }
 });
 
-// @route   POST api/likes/:userId
+// @route   POST api/likes/
 // @desc    Like a user and check for a match
 // @access  Private
-router.post("/likes/:userId", validateToken, async (req, res) => {
+router.post("/likes", validateToken, async (req, res) => {
+  const likerId = req.user.id; // Extracted from JWT by validateToken middleware
+  const { likedUserId } = req.body;
+
+  if (!likedUserId) {
+    return res.status(400).json({ message: "Liked user ID is required." });
+  }
+
   try {
-    const likedUser = await User.findById(req.params.userId);
-    const currentUser = await User.findById(req.user.id);
+    // Add likedUserId to the liker's likes array if not already liked
+    await User.findByIdAndUpdate(
+      likerId,
+      { $addToSet: { likes: likedUserId } }, // $addToSet prevents duplicates
+      { new: true }
+    );
 
-    if (!likedUser || !currentUser) {
-      return res.status(404).json({ msg: "User not found" });
-    }
+    // Now, check if the userToBeLiked has liked the liker back, indicating a match
+    const userToBeLiked = await User.findById(likedUserId);
+    const isMatch = userToBeLiked.likes.includes(likerId);
 
-    // Add liked user's ID to the current user's likes
-    if (!currentUser.likes.includes(likedUser._id)) {
-      currentUser.likes.push(likedUser._id);
-      await currentUser.save();
-    }
-
-    // Check for a match
-    if (likedUser.likes.includes(currentUser._id)) {
-      // match
-      res.json({ msg: "Match found!" });
-    } else {
-      res.json({ msg: "User liked." });
-    }
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+    res.json({
+      message: "User liked successfully.",
+      isMatch: isMatch,
+    });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while updating likes." });
   }
 });
 

@@ -28,7 +28,7 @@ function Profile() {
       });
       if (response.ok) {
         const data = await response.json();
-        setDescription(data.description); // Set the fetched description
+        setDescription(data.description || ""); // Set the fetched description or default to blank
       } else if (response.status === 401) {
         navigate("/login"); // Redirect to login if not authenticated
       }
@@ -67,7 +67,7 @@ function Profile() {
   return (
     <div className="Profile">
       <h3>Your Profile</h3>
-      <UserCard username={username} bio={description} />
+      <UserCard username={username} description={description} />
       <br></br>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
