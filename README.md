@@ -15,7 +15,9 @@ This document provides an overview of the Tinder Clone App, detailing the techno
 ### Setup
 
 1. **Clone the repository**:
-   `git clone https://github.com/JaakkoLipp/AWP-Project.git`
+   ```
+   git clone https://github.com/JaakkoLipp/AWP-Project.git
+   ```
 2. **Install backend dependencies**:
    ```
    cd AWP-Project
@@ -33,25 +35,24 @@ This document provides an overview of the Tinder Clone App, detailing the techno
    npm run server-install
    ```
    manually from the root folder (3):
-   `npm install`
-   `cd client && npm install`
-   `cd server && npm install`
+   ```
+   npm install
+   cd client && npm install
+   cd server && npm install
+   ```
 5. **One command dev-start**:
-   `npm run dev`
+   ```
+   npm run dev
+   ```
 6. **Start the backend server**:
-   `npm start`
+   ```
+   npm start
+   ```
 7. **Start the frontend application**:
-   `npm start`
+   ```
+   npm start
+   ```
 
-"scripts": {
-"test": "echo \"Error: no test specified\" && exit 1",
-"client-install": "npm install && cd client && npm install",
-"dev:client": "cd client && npm start",
-"server-install": "cd server && npm install",
-"dev:server": "cd server && npm run dev",
-"build": "cd client && npm run build",
-"dev": "concurrently \"npm run dev:client\" \"npm run dev:server\""
-},
 The application should now be running on `http://localhost:3000`, with a default mongodb instance at `mongodb://localhost:27017`.
 
 ## User Manual
