@@ -11,12 +11,14 @@ import {
   Button,
 } from "react-bootstrap";
 import { jwtDecode } from "jwt-decode";
+import { useAuth } from "../contexts/AuthContext";
 
 function MessagesPage() {
   const [contacts, setContacts] = useState([]); // Stores matched contacts
   const [selectedContactId, setSelectedContactId] = useState(null); // ID of the currently selected contact for messaging
   const [messages, setMessages] = useState([]); // Stores messages for the selected contact
   const [newMessage, setNewMessage] = useState(""); // State for the new message input
+  const { isAuthenticated } = useAuth();
 
   const token = localStorage.getItem("token");
   const decodedToken = jwtDecode(token);
@@ -92,6 +94,9 @@ function MessagesPage() {
     setSelectedContactId(id);
   };
 
+  if (!isAuthenticated) {
+    return <p>You must be logged in to view messages.</p>;
+  }
   return (
     <Container fluid>
       <Row>
