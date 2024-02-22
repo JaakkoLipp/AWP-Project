@@ -104,32 +104,32 @@ The application should now be running on `http://localhost:3000`, with a default
 
 ### Frontend Dependencies
 
-- **React** (`^18.2.0`): A JavaScript library for building user interfaces with efficient, declarative components.
-- **React Bootstrap** (`^2.10.1`): A front-end framework rebuilt for React to utilize Bootstrap's components with React.
-- **React Router DOM** (`^6.22.1`): A library for handling routing in React applications, allowing for dynamic client-side page transitions.
-- **React Swipeable** (`^7.0.1`): Provides touch swipe event handling capabilities for React components.
-- **Bootstrap** (`^5.3.3`): The world’s most popular framework for building responsive, mobile-first sites.
-- **JWT Decode** (`^4.0.0`): A library for decoding JSON Web Tokens to extract user details on the client side.
+- **React**: A JavaScript library for building user interfaces with efficient, declarative components.
+- **React Bootstrap**: A front-end framework rebuilt for React to utilize Bootstrap's components with React.
+- **React Router DOM**: A library for handling routing in React applications, allowing for dynamic client-side page transitions.
+- **React Swipeable**: Provides touch swipe event handling capabilities for React components.
+- **Bootstrap**: The world’s most popular framework for building responsive, mobile-first sites.
+- **JWT Decode**: A library for decoding JSON Web Tokens to extract user details on the client side.
 
 ### Backend Dependencies
 
-- **Express** (`~4.16.1`): A minimal and flexible Node.js web application framework that provides a robust set of features for web applications.
-- **Mongoose** (`^8.1.3`): An elegant MongoDB object modeling tool for Node.js.
-- **Passport** (`^0.7.0`), **Passport-JWT** (`^4.0.1`), **Passport-Local** (`^1.0.0`): Authentication middleware for Node.js, used for implementing authentication strategies.
-- **Bcrypt** (`^5.1.1`), **Bcryptjs** (`^2.4.3`): Libraries for hashing and comparing hashed passwords.
-- **Cors** (`^2.8.5`): A package for providing an Express middleware that can be used to enable CORS.
-- **Dotenv** (`^16.4.5`): Loads environment variables from a `.env` file into `process.env`, allowing for configuration management.
-- **Express-Session** (`^1.18.0`): Middleware for creating session management in Express applications.
-- **Express-Validator** (`^7.0.1`): An Express middleware for server-side data validation.
-- **Cookie-Parser** (`~1.4.4`): Middleware for parsing cookies attached to the client request object.
-- **Debug** (`~2.6.9`): A tiny JavaScript debugging utility modelled after Node.js core's debugging technique.
-- **Morgan** (`~1.9.1`): HTTP request logger middleware for Node.js.
+- **Express**: A minimal and flexible Node.js web application framework that provides a robust set of features for web applications.
+- **Mongoose**: An elegant MongoDB object modeling tool for Node.js.
+- **Passport**, **Passport-JWT**, **Passport-Local**: Authentication middleware for Node.js, used for implementing authentication strategies.
+- **Bcrypt**, **Bcryptjs**: Libraries for hashing and comparing hashed passwords.
+- **Cors**: A package for providing an Express middleware that can be used to enable CORS.
+- **Dotenv**: Loads environment variables from a `.env` file into `process.env`, allowing for configuration management.
+- **Express-Session**: Middleware for creating session management in Express applications.
+- **Express-Validator**: An Express middleware for server-side data validation.
+- **Cookie-Parser**: Middleware for parsing cookies attached to the client request object.
+- **Debug**: A tiny JavaScript debugging utility modelled after Node.js core's debugging technique.
+- **Morgan**: HTTP request logger middleware for Node.js.
 
 ### Development Dependencies
 
-- **Concurrently** (`^8.2.2`): A utility that manages multiple concurrent tasks during development, like running the backend and frontend simultaneously.
-- **Nodemon** (`^3.0.3`): A utility that monitors for changes in your source and automatically restarts the server.
-- **Cypress** (`^13.6.4`): An end-to-end testing framework for anything that runs in a browser.
+- **Concurrently**: A utility that manages multiple concurrent tasks during development, like running the backend and frontend simultaneously.
+- **Nodemon**: A utility that monitors for changes in your source and automatically restarts the server.
+- **Cypress**: An end-to-end testing framework for anything that runs in a browser.
 
 #### AI Disclosure
 
