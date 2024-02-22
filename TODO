@@ -1,4 +1,9 @@
-- messaging UI bugs
-- msgs functionality
-- match allows messaging
-- make profile hidden if logged out
+- make pages hidden if logged out
+- fix menu
+- make comopnents phone friendly with media queries
+
+---
+
+- a few additional points?
+- Write documentation
+- comment

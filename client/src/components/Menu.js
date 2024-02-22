@@ -31,25 +31,23 @@ function Menu() {
           </Nav>
           {/* login/logout functionality, you can add it here */}
           <Nav>
-            <div className="d-flex">
-              <Nav.Link as={Link} to="/profile">
-                Profile
-              </Nav.Link>
-              {isAuthenticated ? (
-                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-              ) : (
-                <Nav>
-                  <>
-                    <Nav.Link as={Link} to="/login">
-                      Login
-                    </Nav.Link>
-                    <Nav.Link as={Link} to="/register">
-                      Register
-                    </Nav.Link>
-                  </>
-                </Nav>
-              )}
-            </div>
+            <Nav.Link as={Link} to="/profile">
+              Profile
+            </Nav.Link>
+            {isAuthenticated ? (
+              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+            ) : (
+              <Nav>
+                <>
+                  <Nav.Link as={Link} to="/login">
+                    Login
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/register">
+                    Register
+                  </Nav.Link>
+                </>
+              </Nav>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
