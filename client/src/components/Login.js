@@ -36,7 +36,7 @@ function Login() {
 
   return (
     <Container className="mt-5 d-flex justify-content-center align-items-center">
-      <Card style={{ width: "40%", maxWidth: "500px", minWidth: "200px" }}>
+      <Card style={{ width: "40%", maxWidth: "600px", minWidth: "200px" }}>
         <Card.Body>
           <Form onSubmit={handleLogin}>
             <Form.Group className="mb-3" controlId="formBasicEmail">

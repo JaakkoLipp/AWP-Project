@@ -70,7 +70,7 @@ function Profile() {
       <h3>Your Profile</h3>
       <UserCard username={username} description={description} />
       <br></br>
-      <Form onSubmit={handleSubmit}>
+      <Form style={{ "margin-top": "32px" }} onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Edit Description</Form.Label>
           <Form.Control

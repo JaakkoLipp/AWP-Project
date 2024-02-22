@@ -22,11 +22,8 @@ function Menu() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/users">
-              Users
-            </Nav.Link>
             <Nav.Link as={Link} to="/messages">
-              Messages
+              Match-Messages
             </Nav.Link>
           </Nav>
           <Nav>
