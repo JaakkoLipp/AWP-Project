@@ -4,35 +4,9 @@
 
 This document provides an overview of the Tinder Clone App, detailing the technology choices, installation guidelines, and a user manual. The Tinder Clone App is a web application that allows users to register, log in, like, dislike or swipe through user profiles, and chat with matched users.
 
-## Technology Choices
-
-### Frontend
-
-- **React**: A JavaScript library for building user interfaces. React's component-based architecture was chosen for its modularity and responsiveness.
-- **React Bootstrap**: A front-end framework rebuilt for React. It was used to expedite the development process with ready-to-use components that are responsive and customizable.
-- **React Router**: This library was integrated for declarative routing within the React application.
-
-### Backend
-
-- **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine. Node.js was selected for its non-blocking, event-driven architecture, which is ideal for real-time applications like a dating app.
-- **Express**: A minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
-- **MongoDB**: A NoSQL database program, MongoDB uses JSON-like documents with schema. It was chosen for its scalability and flexibility with large amounts of data and queries.
-- **Mongoose**: An Object Data Modeling (ODM) library for MongoDB and Node.js. It manages relationships between data and provides schema validation.
-- **Passport**: An authentication middleware for Node.js, Passport was used to authenticate requests, which is done through an extensible set of plugins known as strategies.
-- **JWT (JSON Web Tokens)**: For secure transmission of information between parties as a JSON object, JWT was used for creating data with optional signature and/or optional encryption.
-
-### Additional notable Libraries and Tools
-
-- **react-swipeable**: A library that provides swipeable components for React, allowing for the integration of swipe gestures.
-- **bcrypt**: A library to help hash passwords.
-- **dotenv**: A zero-dependency module that loads environment variables from a `.env` file into `process.env`.
-- **React-Bootstrap**: Bootstrap framework designed to be used with React, providing responsive design UI elements.
-
 ## Installation Guidelines
 
 ### Prerequisites
-
-At least:
 
 - Node.js
 - npm
@@ -105,7 +79,7 @@ The application should now be running on `http://localhost:3000`, with a default
 
 - Users can log out of the application using the "Logout" button.
 
-## Features Implemented
+### Features Implemented
 
 - User authentication with JWT (login/logout/register)
 - Profile editing
@@ -125,6 +99,37 @@ The application should now be running on `http://localhost:3000`, with a default
 - Timestamp in chat messages +2p
 - Start chat immediately +2p
 
+## Technical Stack
+
+### Frontend Dependencies
+
+- **React** (`^18.2.0`): A JavaScript library for building user interfaces with efficient, declarative components.
+- **React Bootstrap** (`^2.10.1`): A front-end framework rebuilt for React to utilize Bootstrap's components with React.
+- **React Router DOM** (`^6.22.1`): A library for handling routing in React applications, allowing for dynamic client-side page transitions.
+- **React Swipeable** (`^7.0.1`): Provides touch swipe event handling capabilities for React components.
+- **Bootstrap** (`^5.3.3`): The world’s most popular framework for building responsive, mobile-first sites.
+- **JWT Decode** (`^4.0.0`): A library for decoding JSON Web Tokens to extract user details on the client side.
+
+### Backend Dependencies
+
+- **Express** (`~4.16.1`): A minimal and flexible Node.js web application framework that provides a robust set of features for web applications.
+- **Mongoose** (`^8.1.3`): An elegant MongoDB object modeling tool for Node.js.
+- **Passport** (`^0.7.0`), **Passport-JWT** (`^4.0.1`), **Passport-Local** (`^1.0.0`): Authentication middleware for Node.js, used for implementing authentication strategies.
+- **Bcrypt** (`^5.1.1`), **Bcryptjs** (`^2.4.3`): Libraries for hashing and comparing hashed passwords.
+- **Cors** (`^2.8.5`): A package for providing an Express middleware that can be used to enable CORS.
+- **Dotenv** (`^16.4.5`): Loads environment variables from a `.env` file into `process.env`, allowing for configuration management.
+- **Express-Session** (`^1.18.0`): Middleware for creating session management in Express applications.
+- **Express-Validator** (`^7.0.1`): An Express middleware for server-side data validation.
+- **Cookie-Parser** (`~1.4.4`): Middleware for parsing cookies attached to the client request object.
+- **Debug** (`~2.6.9`): A tiny JavaScript debugging utility modelled after Node.js core's debugging technique.
+- **Morgan** (`~1.9.1`): HTTP request logger middleware for Node.js.
+
+### Development Dependencies
+
+- **Concurrently** (`^8.2.2`): A utility that manages multiple concurrent tasks during development, like running the backend and frontend simultaneously.
+- **Nodemon** (`^3.0.3`): A utility that monitors for changes in your source and automatically restarts the server.
+- **Cypress** (`^13.6.4`): An end-to-end testing framework for anything that runs in a browser.
+
 #### AI Disclosure
 
-_OpenAI's ChatGPT was used in parts of this project for brainstorming, simplifing and refactoring code to be more readable and cleaner._
+_OpenAI's ChatGPT was used in parts of this project for brainstorming, simplifing and refactoring code to be more readable and efficient._
