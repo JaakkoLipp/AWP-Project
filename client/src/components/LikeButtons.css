@@ -1,4 +1,3 @@
-/* LikeButton.css */
 .like-buttons {
   display: flex;
   justify-content: center;
@@ -10,11 +9,11 @@
 .dislike-button {
   border: none;
   background-color: transparent;
-  font-size: 24px;
+  font-size: 12rem;
   cursor: pointer;
 }
 
 .like-button:hover,
 .dislike-button:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }

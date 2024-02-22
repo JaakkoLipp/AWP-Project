@@ -43,25 +43,21 @@ router.get("/description", validateToken, async (req, res) => {
 router.patch("/edit-description", validateToken, async (req, res) => {
   const { description } = req.body;
 
-  // Ensure description is provided
   if (!description) {
     return res.status(400).json({ message: "Description is required." });
   }
 
   try {
-    // Assuming req.user.id holds the authenticated user's ID
     const updatedUser = await User.findByIdAndUpdate(
       req.user.id,
       { description },
       { new: true }
     );
 
-    // If the user is not found
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found." });
     }
 
-    // Respond with the updated user information (without sensitive fields)
     res.json({
       message: "Description updated successfully.",
       description: updatedUser.description,
@@ -89,11 +85,11 @@ router.post("/likes", validateToken, async (req, res) => {
     // Add likedUserId to the liker's likes array if not already liked
     await User.findByIdAndUpdate(
       likerId,
-      { $addToSet: { likes: likedUserId } }, // $addToSet prevents duplicates
+      { $addToSet: { likes: likedUserId } },
       { new: true }
     );
 
-    // Now, check if the userToBeLiked has liked the liker back, indicating a match
+    // if the userToBeLiked has liked the liker back == match
     const userToBeLiked = await User.findById(likedUserId);
     const isMatch =
       userToBeLiked.likes && userToBeLiked.likes.includes(likerId);

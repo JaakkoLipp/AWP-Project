@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Card, Container, Alert } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 function Login() {
@@ -23,8 +23,8 @@ function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        login(data.token); // Use the login function from AuthContext
-        navigate("/"); // Redirect after login
+        login(data.token);
+        navigate("/");
       } else {
         setErrorMessage(data.message || "Login failed");
       }
@@ -36,7 +36,7 @@ function Login() {
 
   return (
     <Container className="mt-5 d-flex justify-content-center align-items-center">
-      <Card style={{ width: "40%" }}>
+      <Card style={{ width: "40%", maxWidth: "500px", minWidth: "200px" }}>
         <Card.Body>
           <Form onSubmit={handleLogin}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -53,7 +53,7 @@ function Login() {
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Password"
+                placeholder="Enter Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -69,6 +69,12 @@ function Login() {
             </Alert>
           )}
         </Card.Body>
+        <Card.Footer className="text-muted">
+          Not registered?{" "}
+          <Link as={Link} to="/register">
+            Register
+          </Link>
+        </Card.Footer>
       </Card>
     </Container>
   );

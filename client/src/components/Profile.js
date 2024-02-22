@@ -13,10 +13,14 @@ function Profile() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token"); // Or wherever you've stored the token
+    if (!isAuthenticated) {
+      console.log("Please log in to edit profile.");
+      navigate("/login");
+    }
+    const token = localStorage.getItem("token");
     if (token) {
       const decodedToken = jwtDecode(token);
-      const username = decodedToken.username; // Assuming the payload contains the username
+      const username = decodedToken.username;
       setUsername(username);
     }
     const fetchProfile = async () => {
@@ -28,16 +32,15 @@ function Profile() {
       });
       if (response.ok) {
         const data = await response.json();
-        setDescription(data.description || ""); // Set the fetched description or default to blank
+        setDescription(data.description || "");
       } else if (response.status === 401) {
-        navigate("/login"); // Redirect to login if not authenticated
+        navigate("/login");
       }
     };
 
     fetchProfile();
-  }, [navigate]);
+  }, [isAuthenticated, navigate]);
 
-  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
@@ -52,10 +55,8 @@ function Profile() {
     });
 
     if (response.ok) {
-      // Handle success
       alert("Description updated successfully.");
     } else {
-      // Handle failure
       alert("Failed to update description.");
     }
   };

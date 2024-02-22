@@ -29,7 +29,6 @@ function Menu() {
               Messages
             </Nav.Link>
           </Nav>
-          {/* login/logout functionality, you can add it here */}
           <Nav>
             <Nav.Link as={Link} to="/profile">
               Profile

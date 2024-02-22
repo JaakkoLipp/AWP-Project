@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap";
 import { jwtDecode } from "jwt-decode";
 import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function MessagesPage() {
   const [contacts, setContacts] = useState([]); // Stores matched contacts
@@ -19,6 +20,7 @@ function MessagesPage() {
   const [messages, setMessages] = useState([]); // Stores messages for the selected contact
   const [newMessage, setNewMessage] = useState(""); // State for the new message input
   const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
   const decodedToken = token ? jwtDecode(token) : null;
@@ -26,6 +28,10 @@ function MessagesPage() {
 
   // Fetch matched contacts when the component mounts
   useEffect(() => {
+    if (!isAuthenticated) {
+      console.log("Please log in to use the messages.");
+      navigate("/login");
+    }
     const fetchMatchedUsers = async () => {
       const response = await fetch("/api/matches", {
         headers: { Authorization: `${localStorage.getItem("token")}` },
@@ -39,7 +45,7 @@ function MessagesPage() {
     };
 
     fetchMatchedUsers();
-  }, []);
+  }, [isAuthenticated, navigate]);
 
   // Fetch messages for the selected contact
   useEffect(() => {
@@ -94,9 +100,6 @@ function MessagesPage() {
     setSelectedContactId(id);
   };
 
-  if (!isAuthenticated) {
-    return <p>You must be logged in to view messages.</p>;
-  }
   return (
     <Container fluid>
       <Row>

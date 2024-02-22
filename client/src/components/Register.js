@@ -35,7 +35,7 @@ function Register() {
 
   return (
     <Container className="mt-5 d-flex justify-content-center align-items-center">
-      <Card style={{ width: "40%" }}>
+      <Card style={{ width: "40%", maxWidth: "500px", minWidth: "200px" }}>
         <Card.Body>
           <Form onSubmit={handleRegister}>
             <Form.Group className="mb-3" controlId="registrationUsername">
