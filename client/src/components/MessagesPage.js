@@ -21,8 +21,8 @@ function MessagesPage() {
   const { isAuthenticated } = useAuth();
 
   const token = localStorage.getItem("token");
-  const decodedToken = jwtDecode(token);
-  const loggedInUserId = decodedToken.id;
+  const decodedToken = token ? jwtDecode(token) : null;
+  const loggedInUserId = decodedToken ? decodedToken.id : null;
 
   // Fetch matched contacts when the component mounts
   useEffect(() => {
