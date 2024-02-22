@@ -132,14 +132,13 @@ function MessagesPage() {
             >
               {messages.map((msg) => (
                 <div
-                  key={msg.id}
+                  key={msg._id}
                   className={`message mb-2 p-2 rounded ${
                     msg.sender === loggedInUserId
-                      ? "bg-primary text-white"
-                      : "bg-secondary text-white"
-                  } ${
-                    msg.sender === loggedInUserId ? "text-end" : "text-start"
+                      ? "bg-primary text-white align-self-end text-end"
+                      : "bg-secondary text-white align-self-start text-start"
                   }`}
+                  style={{ width: "80%" }}
                 >
                   {msg.content}
                   <br />

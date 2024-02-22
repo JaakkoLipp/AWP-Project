@@ -68,7 +68,12 @@ function Profile() {
   return (
     <div className="Profile">
       <h3>Your Profile</h3>
-      <UserCard username={username} description={description} />
+      <UserCard
+        username={username}
+        description={description}
+        onLike={() => {}}
+        onDislike={() => {}}
+      />
       <br></br>
       <Form style={{ "margin-top": "32px" }} onSubmit={handleSubmit}>
         <Form.Group className="mb-3">

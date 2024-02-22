@@ -79,6 +79,8 @@ function Main() {
               users[currentIndex].description ||
               "No description has been set by the user yet!"
             }
+            onLike={() => handleLikeDislike(true)}
+            onDislike={() => handleLikeDislike(false)}
           />
           <LikeButton
             onLike={() => handleLikeDislike(true)}
