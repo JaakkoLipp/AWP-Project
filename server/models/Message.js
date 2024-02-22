@@ -21,3 +21,5 @@ const messageSchema = new mongoose.Schema(
     timestamps: true, // Mongoose automatic createdAt and updatedAt
   }
 );
+
+module.exports = mongoose.model("Message", messageSchema);

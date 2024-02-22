@@ -7,12 +7,29 @@ const validateToken = require("../auth/validateToken.js");
 // @desc    Send a message to a user
 // @access  Private
 router.post("/", validateToken, async (req, res) => {
+  const { recipient, content } = req.body;
+  const sender = req.user.id;
+
+  if (!recipient || !content) {
+    return res
+      .status(400)
+      .json({ message: "Recipient and content are required." });
+  }
+
   try {
-    const message = new Message(req.body);
-    await message.save();
-    res.status(201).json(message);
+    const newMessage = new Message({
+      sender,
+      recipient,
+      content,
+    });
+
+    await newMessage.save();
+    res.status(201).json(newMessage);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while sending the message." });
   }
 });
 

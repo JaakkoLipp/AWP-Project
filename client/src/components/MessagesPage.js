@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Row,
@@ -6,53 +6,90 @@ import {
   ListGroup,
   Card,
   Form,
-  Button,
   InputGroup,
   FormControl,
-  Badge,
+  Button,
 } from "react-bootstrap";
-import "./MessagesPage.css";
-// Mock data for contacts
-const contacts = [
-  { id: 1, name: "SpamBot", unread: 14 },
-  { id: 2, name: "User D", unread: 2 },
-  { id: 3, name: "James T Kirk", unread: 1 },
-  // ... other contacts
-];
-
-// Mock data for messages
-const mockMessages = {
-  1: [{ id: 1, text: "Hello there!", senderId: 2, createdAt: new Date() }],
-  // ... other contact messages
-};
+import { jwtDecode } from "jwt-decode";
 
 function MessagesPage() {
-  const [selectedContactId, setSelectedContactId] = useState(contacts[0].id);
-  const [messages, setMessages] = useState(
-    mockMessages[selectedContactId] || []
-  );
-  const [newMessage, setNewMessage] = useState("");
+  const [contacts, setContacts] = useState([]); // Stores matched contacts
+  const [selectedContactId, setSelectedContactId] = useState(null); // ID of the currently selected contact for messaging
+  const [messages, setMessages] = useState([]); // Stores messages for the selected contact
+  const [newMessage, setNewMessage] = useState(""); // State for the new message input
 
-  const handleSelectContact = (contactId) => {
-    setSelectedContactId(contactId);
-    setMessages(mockMessages[contactId] || []);
-  };
+  const token = localStorage.getItem("token");
+  const decodedToken = jwtDecode(token);
+  const loggedInUserId = decodedToken.id;
 
-  const sendMessage = (e) => {
+  // Fetch matched contacts when the component mounts
+  useEffect(() => {
+    const fetchMatchedUsers = async () => {
+      const response = await fetch("/api/matches", {
+        headers: { Authorization: `${localStorage.getItem("token")}` },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setContacts(data.matches);
+      } else {
+        console.error("Failed to fetch matches");
+      }
+    };
+
+    fetchMatchedUsers();
+  }, []);
+
+  // Fetch messages for the selected contact
+  useEffect(() => {
+    const fetchMessages = async () => {
+      if (!selectedContactId) return;
+      const response = await fetch(`/message/${selectedContactId}`, {
+        headers: { Authorization: `${localStorage.getItem("token")}` },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setMessages(data);
+      } else {
+        // Handle failure
+        console.error("Failed to fetch messages");
+      }
+    };
+
+    fetchMessages();
+  }, [selectedContactId]);
+
+  // Handle sending a new message
+  const sendMessage = async (e) => {
     e.preventDefault();
     if (!newMessage.trim()) return;
+    try {
+      const response = await fetch("/message", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          recipient: selectedContactId,
+          content: newMessage,
+        }),
+      });
+      if (response.ok) {
+        const sentMessage = await response.json();
+        setMessages([...messages, sentMessage]);
+        setNewMessage("");
+      } else {
+        // Handle failure
+        console.error("Failed to send message");
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+  };
 
-    // Here you would typically send the message to the backend
-    const newMessageObj = {
-      id: Date.now(),
-      text: newMessage,
-      senderId: selectedContactId,
-      createdAt: new Date(),
-    };
-    setMessages([...messages, newMessageObj]);
-    setNewMessage("");
-
-    // In a real app, after sending the message, you'd fetch the updated messages list
+  // Handle contact selection
+  const handleSelectContact = (id) => {
+    setSelectedContactId(id);
   };
 
   return (
@@ -62,26 +99,24 @@ function MessagesPage() {
           <ListGroup variant="flush">
             {contacts.map((contact) => (
               <ListGroup.Item
-                key={contact.id}
+                key={contact._id}
                 action
-                onClick={() => handleSelectContact(contact.id)}
-                active={contact.id === selectedContactId}
+                onClick={() => handleSelectContact(contact._id)}
+                active={contact._id === selectedContactId}
                 className="d-flex justify-content-between align-items-center"
               >
-                {contact.name}
-                <Badge pill bg="danger">
-                  {contact.unread}
-                </Badge>
+                {contact.username}
               </ListGroup.Item>
             ))}
           </ListGroup>
         </Col>
+
         <Col xs={8} md={9} lg={10} className="chat-area">
           <Card>
             <Card.Header>
               Chat with{" "}
-              {contacts.find((contact) => contact.id === selectedContactId)
-                ?.name || "..."}
+              {contacts.find((contact) => contact._id === selectedContactId)
+                ?.username || "Select a user to start chatting"}
             </Card.Header>
             <Card.Body
               className="overflow-auto d-flex flex-column"
@@ -91,12 +126,12 @@ function MessagesPage() {
                 <div
                   key={msg.id}
                   className={`message mb-2 p-2 rounded ${
-                    msg.senderId === selectedContactId
+                    msg.senderId === loggedInUserId
                       ? "bg-primary text-white"
                       : "bg-secondary text-white"
                   }`}
                 >
-                  {msg.text}
+                  {msg.content}
                   <br />
                   <small>{new Date(msg.createdAt).toLocaleTimeString()}</small>
                 </div>

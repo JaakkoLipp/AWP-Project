@@ -24,7 +24,7 @@ function Login() {
 
       if (response.ok) {
         login(data.token); // Use the login function from AuthContext
-        navigate("/profile"); // Redirect to the profile page or another page of your choice
+        navigate("/"); // Redirect after login
       } else {
         setErrorMessage(data.message || "Login failed");
       }

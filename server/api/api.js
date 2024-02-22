@@ -122,4 +122,26 @@ router.post("/likes", validateToken, async (req, res) => {
       .json({ message: "An error occurred while updating likes." });
   }
 });
+
+// @route   GET api/matches
+// @desc    Get matched user objects.
+// @access  Private
+router.get("/matches", validateToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    const matchedUsers = await User.find({ _id: { $in: user.matches } });
+
+    res.json({ matches: matchedUsers });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "An error occurred while retrieving the user's description.",
+    });
+  }
+});
+
 module.exports = router;
