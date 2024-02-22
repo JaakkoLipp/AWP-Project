@@ -22,7 +22,7 @@ const contacts = [
 
 // Mock data for messages
 const mockMessages = {
-  1: [{ id: 1, text: "Hello there!", senderId: 1, createdAt: new Date() }],
+  1: [{ id: 1, text: "Hello there!", senderId: 2, createdAt: new Date() }],
   // ... other contact messages
 };
 
@@ -90,10 +90,10 @@ function MessagesPage() {
               {messages.map((msg) => (
                 <div
                   key={msg.id}
-                  className={`message mb-2 ${
+                  className={`message mb-2 p-2 rounded ${
                     msg.senderId === selectedContactId
-                      ? "align-self-end"
-                      : "align-self-start"
+                      ? "bg-primary text-white"
+                      : "bg-secondary text-white"
                   }`}
                 >
                   {msg.text}

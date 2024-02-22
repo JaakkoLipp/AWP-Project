@@ -78,7 +78,7 @@ router.patch("/edit-description", validateToken, async (req, res) => {
 // @desc    Like a user and check for a match
 // @access  Private
 router.post("/likes", validateToken, async (req, res) => {
-  const likerId = req.user.id; // Extracted from JWT by validateToken middleware
+  const likerId = req.user.id;
   const { likedUserId } = req.body;
 
   if (!likedUserId) {
@@ -95,12 +95,26 @@ router.post("/likes", validateToken, async (req, res) => {
 
     // Now, check if the userToBeLiked has liked the liker back, indicating a match
     const userToBeLiked = await User.findById(likedUserId);
-    const isMatch = userToBeLiked.likes.includes(likerId);
+    const isMatch =
+      userToBeLiked.likes && userToBeLiked.likes.includes(likerId);
 
-    res.json({
-      message: "User liked successfully.",
-      isMatch: isMatch,
-    });
+    if (isMatch) {
+      // Update both users' matched list
+      await User.findByIdAndUpdate(
+        likerId,
+        { $addToSet: { matches: likedUserId } },
+        { new: true }
+      );
+      await User.findByIdAndUpdate(
+        likedUserId,
+        { $addToSet: { matches: likerId } },
+        { new: true }
+      );
+
+      res.json({ message: "It's a match!", isMatch: true });
+    } else {
+      res.json({ message: "User liked successfully.", isMatch: false });
+    }
   } catch (error) {
     console.error(error);
     res
@@ -108,5 +122,4 @@ router.post("/likes", validateToken, async (req, res) => {
       .json({ message: "An error occurred while updating likes." });
   }
 });
-
 module.exports = router;
