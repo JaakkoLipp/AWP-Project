@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document provides an overview of the Tinder Clone App, detailing the technology choices, installation guidelines, and a user manual. The Tinder Clone App is a web application that allows users to register, log in, like, dislike or swipe through user profiles, and chat with matched users.
+This document provides an overview of the Tinder Clone App, detailing the technology choices, installation guidelines, and a user manual. This text-only-tinder is a web application that allows users to register, log in, like, dislike or swipe through user profiles, and chat with matched users.
 
 ## Installation Guidelines
 
