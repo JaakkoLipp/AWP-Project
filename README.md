@@ -34,7 +34,7 @@ This document provides an overview of the Tinder Clone App, detailing the techno
    npm run client-install
    npm run server-install
    ```
-   manually from the root folder (3):
+   **OR** manually from the root folder (3):
    ```
    npm install
    cd client && npm install
@@ -44,12 +44,14 @@ This document provides an overview of the Tinder Clone App, detailing the techno
    ```
    npm run dev
    ```
-6. **Start the backend server**:
+6. **Start the backend server (Alternative)**:
    ```
+   cd server
    npm start
    ```
-7. **Start the frontend application**:
+7. **Start the frontend application (Alternative)**:
    ```
+   cd client
    npm start
    ```
 
