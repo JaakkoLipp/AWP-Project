@@ -8,7 +8,7 @@ This document provides an overview of the Tinder Clone App, detailing the techno
 
 ### Prerequisites
 
-- Node.js
+- Node.js (v18.0.0)
 - npm
 - MongoDB
 
@@ -17,18 +17,14 @@ This document provides an overview of the Tinder Clone App, detailing the techno
 1. **Clone the repository**:
    ```
    git clone https://github.com/JaakkoLipp/AWP-Project.git
-   ```
-2. **Install backend dependencies**:
-   ```
    cd AWP-Project
-   npm install
    ```
-3. **Set up the environment variables**:
-   Create or edit a `.env` file in the root of your project containing the JWT secret.
+2. **(optional) Set up the environment variables**:
+   Create or edit a `.env` file in the server folder of the project containing the JWT secret. (default provided)
    ```
    SECRET=your_jwt_secret
    ```
-4. **Install dependencies**:
+3. **Install dependencies**:
    Automated scripts (2):
    ```
    npm run client-install
@@ -40,16 +36,16 @@ This document provides an overview of the Tinder Clone App, detailing the techno
    cd client && npm install
    cd server && npm install
    ```
-5. **One command dev-start**:
+4. **One command dev-start**:
    ```
    npm run dev
    ```
-6. **Start the backend server (Alternative)**:
+5. **Start the backend server (Alternative)**:
    ```
    cd server
    npm start
    ```
-7. **Start the frontend application (Alternative)**:
+6. **Start the frontend application (Alternative)**:
    ```
    cd client
    npm start
@@ -61,8 +57,8 @@ The application should now be running on `http://localhost:3000`, with a default
 
 ### Registration and Login
 
-- Users can register for a new account using the "Register" page or the Register link on the login page.
-- Registered users can log in to access the application features.
+- Users can register for a new account using the "/register" page or the Register link on the login page.
+- Registered users can log in to access the application features using the "/login" page.
 
 ### Profile Management
 
@@ -92,6 +88,7 @@ The application should now be running on `http://localhost:3000`, with a default
 - Responsive design
 - React Frontend
 - Express/Node.js Backend
+- Features above tested to be working on two computers.
 
 ## Grading / points proposal
 
