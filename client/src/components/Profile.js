@@ -17,6 +17,7 @@ function Profile() {
     if (!isAuthenticated) {
       console.log("Please log in to edit profile.");
       navigate("/login");
+      return;
     }
 
     // Decode token to get username and set it

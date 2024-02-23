@@ -33,6 +33,7 @@ function MessagesPage() {
     if (!isAuthenticated) {
       console.log("Please log in to use the messages.");
       navigate("/login");
+      return;
     }
 
     // Fetch and set matched contacts
@@ -76,6 +77,11 @@ function MessagesPage() {
     e.preventDefault();
     // Prevent empty messages
     if (!newMessage.trim()) return;
+
+    // Guard clause for unauthenticated users
+    if (!isAuthenticated) {
+      return <p>You must be logged in to view messages.</p>;
+    }
 
     // Post message to server
     try {

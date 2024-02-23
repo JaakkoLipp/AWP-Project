@@ -19,6 +19,7 @@ function Main() {
     if (!isAuthenticated) {
       console.log("Please log in to use the app.");
       navigate("/login");
+      return;
     }
 
     // Function to fetch user profiles
@@ -81,6 +82,11 @@ function Main() {
       console.error("Error handling like/dislike action:", error);
     }
   };
+
+  // Guard clause for unauthenticated users
+  if (!isAuthenticated) {
+    return <p>You must be logged in to use the app.</p>;
+  }
 
   return (
     <div className="card-div">
