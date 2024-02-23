@@ -57,8 +57,8 @@ The application should now be running on `http://localhost:3000`, with a default
 
 ### Registration and Login
 
-- Users can register for a new account using the "Register" page or the Register link on the login page.
-- Registered users can log in to access the application features.
+- Users can register for a new account using the "/register" page or the Register link on the login page.
+- Registered users can log in to access the application features using the "/login" page.
 
 ### Profile Management
 
