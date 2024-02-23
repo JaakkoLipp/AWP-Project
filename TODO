@@ -1,12 +1,1 @@
-# must have
-
-- Start chat immediately, alert button
-- comment
-- Test install scripts
-
-### under consideration
-
-- Provide a search that can filter out only those messages that have the searched keyword
-- Create (unit) tests and automate some testing for example with https://www.cypress.io/ (at least 10 cases have to be implemented)
-- User profiles can have images which are shown on the main page and in the chat
-- User can click username and see user profile page where name, register date, (user picture) and user bio is listed
+# complete !
