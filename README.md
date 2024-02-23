@@ -17,18 +17,14 @@ This document provides an overview of the Tinder Clone App, detailing the techno
 1. **Clone the repository**:
    ```
    git clone https://github.com/JaakkoLipp/AWP-Project.git
-   ```
-2. **Install backend dependencies**:
-   ```
    cd AWP-Project
-   npm install
    ```
-3. **Set up the environment variables**:
+2. **Set up the environment variables**:
    Create or edit a `.env` file in the root of your project containing the JWT secret.
    ```
    SECRET=your_jwt_secret
    ```
-4. **Install dependencies**:
+3. **Install dependencies**:
    Automated scripts (2):
    ```
    npm run client-install
@@ -40,16 +36,16 @@ This document provides an overview of the Tinder Clone App, detailing the techno
    cd client && npm install
    cd server && npm install
    ```
-5. **One command dev-start**:
+4. **One command dev-start**:
    ```
    npm run dev
    ```
-6. **Start the backend server (Alternative)**:
+5. **Start the backend server (Alternative)**:
    ```
    cd server
    npm start
    ```
-7. **Start the frontend application (Alternative)**:
+6. **Start the frontend application (Alternative)**:
    ```
    cd client
    npm start
