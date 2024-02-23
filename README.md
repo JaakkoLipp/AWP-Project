@@ -88,6 +88,7 @@ The application should now be running on `http://localhost:3000`, with a default
 - Responsive design
 - React Frontend
 - Express/Node.js Backend
+- Features above tested to be working on two computers.
 
 ## Grading / points proposal
 
