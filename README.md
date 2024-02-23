@@ -19,8 +19,8 @@ This document provides an overview of the Tinder Clone App, detailing the techno
    git clone https://github.com/JaakkoLipp/AWP-Project.git
    cd AWP-Project
    ```
-2. **Set up the environment variables**:
-   Create or edit a `.env` file in the server folder of the project containing the JWT secret.
+2. **(optional) Set up the environment variables**:
+   Create or edit a `.env` file in the server folder of the project containing the JWT secret. (default provided)
    ```
    SECRET=your_jwt_secret
    ```
