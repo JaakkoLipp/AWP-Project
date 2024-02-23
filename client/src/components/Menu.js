@@ -5,9 +5,11 @@ import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 function Menu() {
+  // authcontext used for user login/logout conditions
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
 
+  // logout button functionality
   const handleLogout = () => {
     logout();
     navigate("/login");

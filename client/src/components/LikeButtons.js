@@ -1,6 +1,8 @@
 import React from "react";
 import "./LikeButtons.css";
 
+// buttons for liking shown on main page under usercards.
+
 function LikeButtons({ onLike, onDislike }) {
   return (
     <div className="like-buttons">

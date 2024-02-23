@@ -1,16 +1,20 @@
+// Import necessary dependencies
 import React from "react";
 import { Card } from "react-bootstrap";
 import { useSwipeable } from "react-swipeable";
 
+// Define the UserCard component functionality
 function UserCard({ username, description, onLike, onDislike }) {
+  // Set up swipe handlers using the useSwipeable hook
   const handlers = useSwipeable({
     onSwipedLeft: () => onDislike(),
     onSwipedRight: () => onLike(),
-    // Prevent default
+    // Prevent default touchmove event
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
 
+  // Render the UserCard component
   return (
     <div {...handlers} style={{}}>
       {" "}

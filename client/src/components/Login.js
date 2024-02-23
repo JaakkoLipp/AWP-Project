@@ -4,16 +4,20 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 function Login() {
+  // State for login credentials and error messages
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  // useAuth hook provides login function
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  // Handles the login form submission
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      // Sends login credentials to the server
       const response = await fetch("/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -23,14 +27,15 @@ function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        login(data.token);
-        navigate("/");
+        login(data.token); // Calls the login function from useAuth with the received token
+        navigate("/"); // Navigates to the home page upon successful login
       } else {
+        // Sets an error message if login is unsuccessful
         setErrorMessage(data.message || "Login failed");
       }
     } catch (error) {
-      console.error("Login error:", error);
-      setErrorMessage("Login failed with error");
+      console.error("Login error:", error); // Logs any network or server error
+      setErrorMessage("Login failed with error"); // Set error message for any caught error
     }
   };
 

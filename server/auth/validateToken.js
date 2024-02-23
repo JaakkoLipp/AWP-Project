@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 
+// used to authenticate and verify users using JWT tokens
 module.exports = function (req, res, next) {
   const authHeader = req.headers["authorization"];
   console.log(authHeader);

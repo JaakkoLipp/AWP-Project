@@ -100,7 +100,6 @@ The application should now be running on `http://localhost:3000`, with a default
 - Swipeable +2p
 - React-Bootstrap +1p
 - Timestamp in chat messages +2p
-- Start chat immediately +2p
 
 ## Technical Stack
 

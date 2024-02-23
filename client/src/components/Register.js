@@ -8,6 +8,7 @@ function Register() {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
+  // Function to handle the registration form submission to backend
   const handleRegister = async (e) => {
     e.preventDefault();
 
@@ -33,6 +34,7 @@ function Register() {
     }
   };
 
+  // Render the registration form
   return (
     <Container className="mt-5 d-flex justify-content-center align-items-center">
       <Card style={{ width: "40%", maxWidth: "600px", minWidth: "200px" }}>

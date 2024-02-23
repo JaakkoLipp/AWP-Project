@@ -15,23 +15,27 @@ import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 function MessagesPage() {
-  const [contacts, setContacts] = useState([]); // Stores matched contacts
-  const [selectedContactId, setSelectedContactId] = useState(null); // ID of the currently selected contact for messaging
+  const [contacts, setContacts] = useState([]); // Stores matched users
+  const [selectedContactId, setSelectedContactId] = useState(null); // ID of the currently selected contact on the sidebar
   const [messages, setMessages] = useState([]); // Stores messages for the selected contact
-  const [newMessage, setNewMessage] = useState(""); // State for the new message input
+  const [newMessage, setNewMessage] = useState("");
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
+  // Decode user ID from stored JWT token
   const token = localStorage.getItem("token");
   const decodedToken = token ? jwtDecode(token) : null;
   const loggedInUserId = decodedToken ? decodedToken.id : null;
 
   // Fetch matched contacts when the component mounts
   useEffect(() => {
+    // Redirect if not authenticated
     if (!isAuthenticated) {
       console.log("Please log in to use the messages.");
       navigate("/login");
     }
+
+    // Fetch and set matched contacts
     const fetchMatchedUsers = async () => {
       const response = await fetch("/api/matches", {
         headers: { Authorization: `${localStorage.getItem("token")}` },
@@ -47,9 +51,10 @@ function MessagesPage() {
     fetchMatchedUsers();
   }, [isAuthenticated, navigate]);
 
-  // Fetch messages for the selected contact
+  // Fetch messages for selected contact
   useEffect(() => {
     const fetchMessages = async () => {
+      // Exit if no contact is selected
       if (!selectedContactId) return;
       const response = await fetch(`/message/${selectedContactId}`, {
         headers: { Authorization: `${localStorage.getItem("token")}` },
@@ -66,10 +71,13 @@ function MessagesPage() {
     fetchMessages();
   }, [selectedContactId]);
 
-  // Handle sending a new message
+  // New message to backend
   const sendMessage = async (e) => {
     e.preventDefault();
+    // Prevent empty messages
     if (!newMessage.trim()) return;
+
+    // Post message to server
     try {
       const response = await fetch("/message", {
         method: "POST",
@@ -83,8 +91,8 @@ function MessagesPage() {
         }),
       });
       if (response.ok) {
-        const sentMessage = await response.json();
-        setMessages([...messages, sentMessage]);
+        const sentMessage = await response.json(); // Update local message list
+        setMessages([...messages, sentMessage]); // Clear input field
         setNewMessage("");
       } else {
         // Handle failure
@@ -95,7 +103,7 @@ function MessagesPage() {
     }
   };
 
-  // Handle contact selection
+  // Updates the currently selected contact on sidebar
   const handleSelectContact = (id) => {
     setSelectedContactId(id);
   };

@@ -38,7 +38,7 @@ router.get("/description", validateToken, async (req, res) => {
 });
 
 // @route   PATCH api/edit-description
-// @desc    Allows user to edits its own description
+// @desc    Allows user to edit their own profile description
 // @access  Private
 router.patch("/edit-description", validateToken, async (req, res) => {
   const { description } = req.body;
@@ -120,7 +120,7 @@ router.post("/likes", validateToken, async (req, res) => {
 });
 
 // @route   GET api/matches
-// @desc    Get matched user objects.
+// @desc    Get matched user objects for currently logged in user.
 // @access  Private
 router.get("/matches", validateToken, async (req, res) => {
   try {

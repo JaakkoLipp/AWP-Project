@@ -13,16 +13,21 @@ function Profile() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Redirect to login if not authenticated
     if (!isAuthenticated) {
       console.log("Please log in to edit profile.");
       navigate("/login");
     }
+
+    // Decode token to get username and set it
     const token = localStorage.getItem("token");
     if (token) {
       const decodedToken = jwtDecode(token);
       const username = decodedToken.username;
       setUsername(username);
     }
+
+    // Fetch user description
     const fetchProfile = async () => {
       const token = localStorage.getItem("token");
       const response = await fetch("/api/description", {
@@ -33,6 +38,7 @@ function Profile() {
       if (response.ok) {
         const data = await response.json();
         setDescription(data.description || "");
+        // Redirect to login if token is unauthorized
       } else if (response.status === 401) {
         navigate("/login");
       }
@@ -41,6 +47,7 @@ function Profile() {
     fetchProfile();
   }, [isAuthenticated, navigate]);
 
+  // Updated description to backend
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
@@ -61,10 +68,12 @@ function Profile() {
     }
   };
 
+  // Guard clause for unauthenticated users
   if (!isAuthenticated) {
     return <p>You must be logged in to edit your profile.</p>;
   }
 
+  // Render profile
   return (
     <div className="Profile">
       <h3>Your Profile</h3>

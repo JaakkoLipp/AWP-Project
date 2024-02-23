@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// message Schema, used in messagesPage component. created on message send.
 const messageSchema = new mongoose.Schema(
   {
     sender: {
