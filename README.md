@@ -8,7 +8,7 @@ This document provides an overview of the Tinder Clone App, detailing the techno
 
 ### Prerequisites
 
-- Node.js
+- Node.js (v18.0.0)
 - npm
 - MongoDB
 
